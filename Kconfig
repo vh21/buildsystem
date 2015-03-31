@@ -1,0 +1,16 @@
+# Copyright (c) 2013 The F9 Microkernel Project. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+mainmenu "Skeleton Configurations"
+
+choice
+	prompt "Select Target"
+
+config TARGET_skeleton
+	bool "skeleton"	
+
+config TARGET_azmodan
+	bool "azmodan"	
+
+endchoice

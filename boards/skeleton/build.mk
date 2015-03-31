@@ -1,0 +1,1 @@
+board-y += main.o
