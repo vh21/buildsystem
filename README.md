@@ -1,3 +1,9 @@
+The project is released under 2-clause BSD license
+
+----
+The source of kconfig comes from linux and it's under GPL license
+
+----
 kbuild type building environment. Inspired by F9 Microkernel, linux kernel
 
 Characteristics:
