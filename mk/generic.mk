@@ -68,7 +68,7 @@ $(out)/%.elf.bin: $(out)/%.elf
 $(out)/%.list: $(out)/%.elf
 	$(call quiet,elf_to_list,OBJDUMP)
 
-$(out)/%.elf: $(objs)
+$(out)/$(BOARD).elf: $(objs)
 	$(call quiet,elf,LD     )
 
 $(out)/%.o:%.c
