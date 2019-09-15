@@ -23,6 +23,11 @@ out ?= build/$(BOARD)
 # output directory for host build boardss
 out_host ?= build/host
 
+all-y:=
+dirs-y:=
+
+include mk/utils.mk
+
 # obtain CHIP name
 include boards/$(BOARD)/build.mk
 
@@ -41,12 +46,7 @@ include user/build.mk
 
 includes += $(includes-y)
 
-objs_from_dir = $(foreach obj, $(obj-y), \
-		$(out)/$(1)/$(firstword $(obj)))
-
 # Get all sources to build
-all-y += $(call objs_from_dir,boards/$(BOARD))
-all-y += $(call objs_from_dir,user)
 dirs = \
 	boards/$(BOARD) \
 	user

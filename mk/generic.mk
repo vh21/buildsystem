@@ -1,7 +1,6 @@
 # Copyright (c) 2013 The F9 Microkernel Project. All rights reserved.
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
-
 objs := $(all-y)
 deps := $(objs:%.o=%.o.d)
 build-utils := $(foreach u,$(build-util-bin),$(out)/util/$(u))
@@ -13,6 +12,8 @@ host-utils := $(foreach u,$(host-util-bin),$(out)/util/$(u))
 objname = $(basename $(notdir $@))
 tmpcflags = $(CFLAGS_TOOLCHAIN) $(CFLAGS_$(objname).o)
 CFLAGS = $(filter-out $(CFLAGS_REMOVE_$(objname).o), $(tmpcflags))
+
+subdir-y += $(patsubst %/,%,$(filter %/, $(obj-y)))
 
 #
 # Create output directories if necessary
