@@ -41,12 +41,12 @@ include user/build.mk
 
 includes += $(includes-y)
 
-objs_from_dir = $(foreach obj, $($(2)-y), \
+objs_from_dir = $(foreach obj, $(obj-y), \
 		$(out)/$(1)/$(firstword $(obj)))
 
 # Get all sources to build
-all-y += $(call objs_from_dir,boards/$(BOARD),board)
-all-y += $(call objs_from_dir,user,user)
+all-y += $(call objs_from_dir,boards/$(BOARD))
+all-y += $(call objs_from_dir,user)
 dirs = \
 	boards/$(BOARD) \
 	user
