@@ -3,10 +3,7 @@
 *.ko
 *.obj
 *.elf
-
-# Precompiled Headers
-*.gch
-*.pch
+*.list
 
 # Libraries
 *.lib
@@ -30,3 +27,8 @@
 
 # Debug files
 *.dSYM/
+
+# Temporary archives
+build/
+*.swp
+.config*
