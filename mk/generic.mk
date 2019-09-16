@@ -13,8 +13,6 @@ objname = $(basename $(notdir $@))
 tmpcflags = $(CFLAGS_TOOLCHAIN) $(CFLAGS_$(objname).o)
 CFLAGS = $(filter-out $(CFLAGS_REMOVE_$(objname).o), $(tmpcflags))
 
-subdir-y += $(patsubst %/,%,$(filter %/, $(obj-y)))
-
 #
 # Create output directories if necessary
 #
@@ -24,35 +22,6 @@ _dir_y_create := $(foreach d,$(dirs-y),$(shell [ -d $(out)/$(d) ] || \
 	    mkdir -p $(out)/$(d)))
 
 bin-list = $(bin-list-y)
-
-#
-# Decrease verbosity unless you pass V=1
-#
-quiet = $(if $(V),,@echo '  $(2)' $(subst $(out)/,,$@) ; )$(cmd_$(1))
-silent = $(if $(V),,1>/dev/null)
-
-#
-# commands to build all targets
-#
-cmd_obj_to_bin = $(OBJCOPY) -O binary $< $@
-cmd_elf_to_list = $(OBJDUMP) -S $< > $@
-cmd_elf = $(LD) $(LDFLAGS) $(objs) -o $@ \
-	 $(LIBGCC) \
-	-Wl,-Map,$(out)/$*.map
-cmd_c_to_o = $(CC) $(CFLAGS) -MMD -MF $@.d -c $< -o $@
-cmd_c_to_build = $(BUILDCC) $(BUILD_CFLAGS) $(BUILD_LDFLAGS) \
-	         -MMD -MF $@.d $< -o $@
-cmd_bin = cat $^ > $@
-
-#
-# commands to build Kconfig
-#
-KCONFIG := utils/kconfig
-cmd_kconfig_prepare = mkdir -p $(out_host) $(out_host)/lxdialog
-cmd_kconfig = $(MAKE) --no-print-directory -C $(KCONFIG) -f main.mk default \
-		obj=$(shell pwd)/$(out_host) \
-		CC="$(BUILDCC)" HOSTCC="$(BUILDCC)"
-cmd_mconf = $< Kconfig
 
 #
 # makefile targets
